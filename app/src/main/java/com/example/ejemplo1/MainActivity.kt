@@ -5,6 +5,8 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
@@ -26,7 +28,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             Ejemplo1Theme {
-                    Content()
+                    GreetingPreview()
 
                 }
             }
@@ -36,22 +38,27 @@ class MainActivity : ComponentActivity() {
 
 @Preview(showBackground = true)
 @Composable
-fun Content(){
-    Text(
-        text="Hola Jetpack Compose",
-        color= Color.Red,
-        fontWeight=FontWeight.Bold,
-        fontSize = 28.sp,
-        textAlign = TextAlign.Center,
-        modifier=Modifier
-            .padding(3.dp)
-            .background(Color.Green)
-    )
+fun GreetingPreview(){
+Content("Hola", "Mundo")
 
     /*Modificadores
     *De posicionamiento: width, height, top, bottm, start, end
     * De funcionalidad: click, scroll
     * De apariencia: background, padding, border
      */
+}
+@Composable
+fun Content(mensaje1:String,mensaje2:String)
+{
+    Column {
+        Text(mensaje1
+                        , fontSize = 15.sp)
+        Text(mensaje2
+                        , lineHeight = 25.sp)
+        Text("Luis"
+                        , fontWeight = FontWeight.Bold
+                        , fontSize = 30.sp
+                        , lineHeight = 32.sp)
+    }
 }
 
