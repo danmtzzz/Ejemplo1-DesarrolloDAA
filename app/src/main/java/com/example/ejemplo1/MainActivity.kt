@@ -46,5 +46,6 @@ fun GreetingPreview() {
     Ejemplo1Theme {
         Greeting("Feliz Cumpleaños Jose")
         Greeting("Android")
+        //Greeting Preveiw
     }
 }
