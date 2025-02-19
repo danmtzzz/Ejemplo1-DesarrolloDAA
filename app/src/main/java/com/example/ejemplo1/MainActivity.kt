@@ -4,13 +4,31 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.ejemplo1.ui.theme.Ejemplo1Theme
 
@@ -20,32 +38,70 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             Ejemplo1Theme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
+                GreetingPreview()
                 }
             }
         }
     }
-}
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = name,
-        fontSize = 100.sp,
-        lineHeight = 116.sp
-    )
-}
+
 
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
-    Ejemplo1Theme {
-        Greeting("Feliz Cumpleaños Jose")
-        Greeting("Android")
-        //Greeting Preveiw
-    }
+Column {
+    Imagen()
+    Texto()
+    Boton()
 }
+}
+
+@Composable
+fun Imagen(){
+    Image(
+        painter = painterResource(id = R.drawable.matematicas),
+        contentDescription = "imagen",
+        modifier = Modifier.fillMaxWidth()
+    )
+}
+
+@Composable
+fun Texto(){
+    var text1 by remember { mutableStateOf("") }
+    var text2 by remember { mutableStateOf("") }
+
+    OutlinedTextField(
+        value = text1,
+        modifier = Modifier.padding(horizontal = 70.dp)
+            .fillMaxWidth(1f),
+            onValueChange = {
+                text1 = it
+            }
+        ,
+        placeholder = { Text(text = "Ingresa tu nombre") },
+    )
+
+    OutlinedTextField(
+        value = text2,
+        modifier = Modifier.padding(horizontal = 70.dp, vertical = 50.dp)
+            .fillMaxWidth(1f),
+        onValueChange = {
+            text2 = it
+        }
+        ,
+        placeholder = { Text(text = "Ingresa tu escuela") },
+    )
+}
+
+@Composable
+fun Boton(){
+        Button(
+            onClick = {},
+            border = BorderStroke(1.dp, Color.Black),
+            colors = ButtonDefaults.buttonColors(Color.Black),
+            modifier = Modifier.padding(horizontal = 145.dp, vertical = 10.dp)
+
+        ) {
+            Text(text = "Ingresar", color = Color.White)
+        }
+    }
