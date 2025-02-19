@@ -80,7 +80,8 @@ fun Texto(){
                 text1 = it
             }
         ,
-        placeholder = { Text(text = "Valor 1") },
+        label = {Text("Valor 1")},
+        placeholder = { Text(text = "Teclea el primer valor") },
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
     )
 
@@ -92,7 +93,8 @@ fun Texto(){
             text2 = it
         }
         ,
-        placeholder = { Text(text = "Valor 2") },
+        label = {Text("Valor 2")},
+        placeholder = { Text(text = "Teclea el segundo valor") },
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
     )
 }
