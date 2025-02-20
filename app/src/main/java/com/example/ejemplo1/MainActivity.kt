@@ -1,14 +1,17 @@
 package com.example.ejemplo1
 
 import android.os.Bundle
+import android.widget.Space
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -54,7 +57,6 @@ fun GreetingPreview() {
 Column {
     Imagen()
     Texto()
-    Boton()
 }
 }
 
@@ -69,9 +71,9 @@ fun Imagen(){
 
 @Composable
 fun Texto(){
+
     var text1 by remember { mutableStateOf("") }
     var text2 by remember { mutableStateOf("") }
-
     OutlinedTextField(
         value = text1,
         modifier = Modifier.padding(horizontal = 70.dp)
@@ -97,17 +99,26 @@ fun Texto(){
         placeholder = { Text(text = "Teclea el segundo valor") },
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
     )
+
+    var resultado by remember{(mutableStateOf(0.0))}
+
+    Button(
+        onClick = {
+            resultado = text1.toDouble() + text2.toDouble()
+
+        },
+        border = BorderStroke(1.dp, Color.Black),
+        colors = ButtonDefaults.buttonColors(Color.Black),
+        modifier = Modifier.padding(horizontal = 145.dp, vertical = 7.dp)
+
+    ) {
+        Text(text = "Calcular", color = Color.White)
+    }
+
+    Text(
+        "El resultado de la suma es: " + resultado,
+        modifier = Modifier.padding(horizontal = 90.dp)
+    )
 }
 
-@Composable
-fun Boton(){
-        Button(
-            onClick = {},
-            border = BorderStroke(1.dp, Color.Black),
-            colors = ButtonDefaults.buttonColors(Color.Black),
-            modifier = Modifier.padding(horizontal = 145.dp, vertical = 10.dp)
 
-        ) {
-            Text(text = "Calcular", color = Color.White)
-        }
-    }
