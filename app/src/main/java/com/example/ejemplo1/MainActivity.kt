@@ -8,6 +8,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -63,7 +64,7 @@ Column {
 @Composable
 fun Imagen(){
     Image(
-        painter = painterResource(id = R.drawable.matematicas),
+        painter = painterResource(id = R.drawable.walmart),
         contentDescription = "imagen",
         modifier = Modifier.fillMaxWidth()
     )
@@ -72,52 +73,57 @@ fun Imagen(){
 @Composable
 fun Texto(){
 
-    var text1 by remember { mutableStateOf("") }
-    var text2 by remember { mutableStateOf("") }
+    var precio by remember { mutableStateOf("") }
+    var descuento by remember { mutableStateOf("") }
+    Row {
     OutlinedTextField(
-        value = text1,
-        modifier = Modifier.padding(horizontal = 70.dp)
-            .fillMaxWidth(1f),
+        value = precio,
+        modifier = Modifier.padding(horizontal = 20.dp)
+            .fillMaxWidth(0.5f),
             onValueChange = {
-                text1 = it
+                precio = it
             }
         ,
-        label = {Text("Valor 1")},
-        placeholder = { Text(text = "Teclea el primer valor") },
+        label = {Text("Precio")},
+        placeholder = { Text(text = "Ingresa el precio del producto") },
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
     )
 
     OutlinedTextField(
-        value = text2,
-        modifier = Modifier.padding(horizontal = 70.dp, vertical = 50.dp)
-            .fillMaxWidth(1f),
+        value = descuento,
+        modifier = Modifier.padding(horizontal = 5.dp/*, vertical = 50.dp*/)
+            .fillMaxWidth(0.9f),
         onValueChange = {
-            text2 = it
+            descuento = it
         }
         ,
-        label = {Text("Valor 2")},
-        placeholder = { Text(text = "Teclea el segundo valor") },
+        label = {Text("Descuento")},
+        placeholder = { Text(text = "Ingresa el porcentaje de descuento(%)") },
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
     )
-
-    var resultado by remember{(mutableStateOf(0.0))}
+}
+    var descuentoTotal by remember{(mutableStateOf(0.0))}
+    var precioNuevo by remember{(mutableStateOf(0.0))}
 
     Button(
         onClick = {
-            resultado = text1.toDouble() + text2.toDouble()
+            descuentoTotal = (precio.toDouble() * descuento.toDouble())/100
+            precioNuevo = precio.toDouble() - descuentoTotal
 
         },
         border = BorderStroke(1.dp, Color.Black),
         colors = ButtonDefaults.buttonColors(Color.Black),
         modifier = Modifier.padding(horizontal = 145.dp, vertical = 7.dp)
 
+
     ) {
         Text(text = "Calcular", color = Color.White)
     }
 
     Text(
-        "El resultado de la suma es: " + resultado,
-        modifier = Modifier.padding(horizontal = 90.dp)
+        "El precio con el descuento aplicado es de: " + precioNuevo,
+        modifier = Modifier.padding(horizontal = 50.dp),
+        color = Color.Blue
     )
 }
 
